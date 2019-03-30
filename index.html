@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      .background {
+        background-color: hsl(170, 50%, 70%);
+        width: 100%;
+        height: 100vh;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+      }
+      .container {
+        z-index: 0;
+        position: relative;
+        width: 90%;
+        height: 80%;
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 40px;
+        box-shadow: 1px 1px 25px 15px inset rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+      }
+      .launcher {
+        width: 20px;
+        height: 40px;
+        background-color: rebeccapurple;
+        position: absolute;
+        bottom: 0;
+        left: 0px;
+      }
+      svg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+
+    <div class="background">
+      <div class="container">
+        <div class="launcher"></div>
+        <svg></svg>
+      </div>
+    </div>
+
+    <script>
+      d3.select('svg')
+        .append('line')
+        .attrs({
+          x1: 10,
+          y1: 40,
+          x2: 10,
+          y2: 70,
+          stroke: 'white',
+        });
+
+      const handleMouseMove = () => {
+        const mouseX = d3.event.pageX;
+        const mouseY = d3.event.pageY;
+
+        const launcherOffsetLeft = window.innerWidth * 0.05 + 10;
+
+        d3.select('.launcher').style(
+          'left',
+          mouseX - launcherOffsetLeft + 'px',
+        );
+      };
+
+      d3.select('body').on('mousemove', handleMouseMove);
+    </script>
+  </body>
+</html>
